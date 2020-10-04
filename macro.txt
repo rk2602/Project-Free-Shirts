@@ -1,0 +1,30 @@
+Sub CommandButton1()
+
+Dim i As Integer
+
+For i = 2 To 1254
+Dim OutApp As Object
+Dim OutMail As Object
+Dim strbody As String
+
+Set OutApp = CreateObject("Outlook.Application")
+Set OutMail = OutApp.CreateItem(0)
+
+    strbody = "<add what you want to write here>"
+On Error Resume Next
+
+With OutMail
+    .To = "admission@" + Range("E" + CStr(i))
+    .CC = ""
+    .BCC = ""
+    .Subject = "I would love to represent " & Range("B" + CStr(i))
+    .Body = strbody
+    .Send
+
+End With
+On Error GoTo 0
+
+Set OutMail = Nothing
+Set OutApp = Nothing
+Next i
+End Sub
